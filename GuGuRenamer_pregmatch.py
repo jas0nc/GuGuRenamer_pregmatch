@@ -22,16 +22,16 @@ import glob, re, os, sys
 
 #define path to scan
 if not path:
-	path = os.path.dirname(os.path.abspath(__file__))+"/../**/"
+	path = os.path.dirname(os.path.abspath(__file__))+"/../**"
 else:
-	path = path
+	path = path	
 print("Scanning: " + path) #for debug use
 
 #serach files with specified filetype
 files_grabbed = []
 for files in types:
-	files_grabbed.extend(glob.glob( path + files))
-	files_grabbed.extend(glob.glob( path + "**/" + files))
+	files_grabbed.extend(glob.glob( path + "/" + files))
+	files_grabbed.extend(glob.glob( path + "/**/" + files))
 	files_grabbed.extend(glob.glob( path + "/**/**/" + files))
 files_grabbed   # the list of pdf and cpp files
 #print(files_grabbed) #for debug use
