@@ -24,7 +24,7 @@ import glob, re, os, sys
 if not path:
 	path = os.path.dirname(os.path.abspath(__file__))+"/../**"
 else:
-	path = path	
+	path = path
 print("Scanning: " + path) #for debug use
 
 #serach files with specified filetype
@@ -40,7 +40,9 @@ files_grabbed   # the list of pdf and cpp files
 #start rename process
 for filename in files_grabbed:
    #duplicate filename to new_name
-	new_name = filename
+	old_name = os.path.basename(filename)
+	new_name = os.path.basename(filename)
+	location = os.path.split(os.path.abspath(filename))[0] + "/"
 	process = ""
 	if re.search('\s-\s\d+', new_name):
 		process += ' " - XX"  => " EXX ";'
@@ -84,11 +86,11 @@ for filename in files_grabbed:
 			#value = int(matched.group('value'))
 			return " S" + str('{:02d}'.format(3)) + ""
 		new_name = re.sub('\sIII\]\s',replacenum,new_name)
-	if (filename != new_name):
+	if (old_name != new_name):
 		#rename the file
-		os.rename(filename, new_name)
-		print ("	OLD-Name: "+ filename)
+		os.rename(location + old_name, location+new_name)
+		print ("	OLD-Name: "+ location + old_name)
 		print ("	Handling:  " + process)
-		print ("	NEW-Name: " + new_name)
+		print ("	NEW-Name: " + location + new_name)
 
 sys.exit("End: GuGuRenamer Execution Completed")
