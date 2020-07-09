@@ -24,7 +24,7 @@ import glob, re, os, sys, csv
 if not path:
 	path = os.path.dirname(os.path.abspath(__file__))+"/../**"
 else:
-	path = path
+	path = path	
 print("Scanning: " + path) #for debug use
 
 #serach files with specified filetype
@@ -107,13 +107,13 @@ for filename in files_grabbed:
 			#value = int(matched.group('value'))
 			return " S" + str('{:02d}'.format(3)) + ""
 		new_name = re.sub('\sIII\]\s',replacenum,new_name)
-
-	for key in dictionary:
+		
+	for key in dictionary:  
 		#print("Dict(Find)") #for debug use
 		#print(key) #for debug use
 		#print("Dict(Repl)") #for debug use
 		#print(dictionary[key]) #for debug use
-
+		
 		#prepare the new_name for renaming
 		if new_name.find(key):
 			new_name = new_name.replace(key, dictionary[key])
@@ -126,5 +126,5 @@ for filename in files_grabbed:
 		print ("	OLD-Name: "+ location + old_name)
 		print ("	Handling:  " + process)
 		print ("	NEW-Name: " + location + new_name)
-
+  
 sys.exit("End: GuGuRenamer Execution Completed")
