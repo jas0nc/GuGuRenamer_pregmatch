@@ -59,7 +59,15 @@ for filename in files_grabbed:
 	new_name = os.path.basename(filename)
 	location = os.path.split(os.path.abspath(filename))[0] + "/"
 	process = ""
+	if re.search('Sword Art Online - Alicization War of Underworld - The Last Season\s-\s\d+', new_name):
+		#[Lilith-Raws] Sword Art Online - Alicization War of Underworld - The Last Season - 37
+		process += ' "Sword Art Online - Alicization War of Underworld - The Last Season - XX"  =>Alicization War of Underworld " S04EXX(-24) ";'
+		def replacenum(matched):
+			value = int(matched.group('value'))-24
+			return " S04E" + str('{:02d}'.format(value)) + " "
+		new_name = re.sub('\s-\s(?P<value>\d+)',replacenum,new_name)
 	if re.search('Alicization War of Underworld\s-\s\d+', new_name):
+		#[Lilith-Raws] Sword Art Online - Alicization War of Underworld - 25
 		process += ' "Alicization War of Underworld - XX"  =>Alicization War of Underworld " S04EXX(-24) ";'
 		def replacenum(matched):
 			value = int(matched.group('value'))-24
